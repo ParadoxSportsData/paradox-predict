@@ -137,7 +137,7 @@ curl -s -X POST http://localhost:8002/predict/scenario \
 ## Model
 
 - **Algorithm:** XGBoost binary classifier
-- **Source:** Trained in `paradox-platform/src/ml/`; serialized as `ml/model.pkl`
+- **Source:** Trained in [paradox-train](https://github.com/ParadoxSportsData/paradox-train); serialized as `ml/model.pkl`
 - **Target:** Home-team win probability
 - **Features (11, in training order):**
   1. `score_differential`
