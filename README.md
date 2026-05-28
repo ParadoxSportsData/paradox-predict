@@ -8,6 +8,30 @@ Win-probability prediction service for the ParadoxSportsData platform. Wraps a t
 
 ---
 
+## Architecture
+
+```mermaid
+flowchart LR
+    Req["POST /predict/scenario\nScenarioRequest (9 fields)"]
+    Invert["invert yardline\n100 − yardline_100"]
+    Era["determine_ot_era()\nseason + week → OTEra"]
+    Feat["scenario_to_features()\n11-element array"]
+    Model["XGBClassifier\nmodel.pkl"]
+    HomeWP["home_team WP"]
+    Flip["away possession?\n1.0 − home_wp"]
+    Resp["win_probability\n(possession-team perspective)"]
+
+    Req --> Invert
+    Invert --> Era
+    Era --> Feat
+    Feat --> Model
+    Model --> HomeWP
+    HomeWP --> Flip
+    Flip --> Resp
+```
+
+---
+
 ## System dependency
 
 XGBoost on macOS requires OpenMP:
